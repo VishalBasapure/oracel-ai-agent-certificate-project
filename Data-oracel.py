@@ -139,12 +139,11 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif; background: #f8f9
 </style>
 """, unsafe_allow_html=True)
 
-# ── Session state ─────────────────────────────────────────────────────────────
+
 for key in ['agent_running','agent_done','steps','anomalies','report','df','kpis','charts_data']:
     if key not in st.session_state:
         st.session_state[key] = None if key not in ['steps','anomalies','charts_data'] else []
 
-# ── Gemini setup ──────────────────────────────────────────────────────────────
 def get_gemini():
     try:
         key = st.secrets.get("GEMINI_API_KEY", "")
@@ -155,7 +154,6 @@ def get_gemini():
     except Exception:
         return None
 
-# ── Agent Tools (Agentic AI concept — each tool is autonomous) ────────────────
 def tool_load_data(df):
     """Tool 1: Load and profile the dataset"""
     return {
